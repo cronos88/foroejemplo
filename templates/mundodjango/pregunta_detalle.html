@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ p.titulo }} - Mundo Django{% endblock %}
+
+{% block content %}
+    <h3>{{ p.titulo }}</h3><br/>
+    <p>Votos: {{ p.votos }}</p> <a href="{% url 'plus_preg' p.id %}">Up</a><br/>
+    <p>{{ p.descripcion }}</p><br/>
+    <p>{{ user.username }}</p>
+    <br/>
+    <br/>
+    {{ respuestas.count }}<h4>Respuesta{{ respuestas.count|pluralize }}:</h4><br/>
+    <ul>
+        {% for resp in respuestas %}
+            <div>
+                {{ resp.descripcion }}<br/>
+                <p>Posteado por:</p><strong>{{ resp.usuario }}</strong> el {{ resp.fecha_resp }}<br/>
+
+                    {{ resp.votos }} <a href="{% url 'plus_resp' resp.id %}">Up</a>
+
+            </div>
+        {% endfor %}
+
+    </ul>
+{% endblock %}
